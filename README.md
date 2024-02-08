@@ -4,6 +4,8 @@
 
 Uses a servo and RTC on an Arduino to lift my blinds in the morning.
 
+<hr>
+
 ## Hardware
 
 - sg90 (for now, until I replace my fried one).
