@@ -18,7 +18,7 @@
 
 /* pin layout servo sg90
 VCC(Red) - 5V
-SIG(orange) - D8
+SIG(orange) - D9
 GND(Brown) - GND
 */
 
