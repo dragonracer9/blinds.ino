@@ -24,12 +24,12 @@ GND(Brown) - GND
 
 // Servo motor
 Servo servo;
-#define SERVO_PIN 9
+#define SERVO_PIN 6
 
 // Init the DS3231
 DS3231 rtc;
 // interrupt pin (on the arduino uno, interrupt pins are digital pins 2 and 3)
-#define CLINT 2
+#define CLINT 52
 
 // Define the data structures
 struct Dates {
@@ -114,8 +114,25 @@ void setup()
 
     if (Serial) {
         if (servo.attached()) {
-            Serial.println("Servo attached");
+            Serial.println("Servo attached, running dioagnostic");
+            Serial.println("0");
             servo.write(0);
+            delay(1000);
+            servo.detach(); // Stop. You can use deatch function or use write(x), as x is the middle of 0-180 which is 90, but some lack of precision may change this value
+            delay(1000);
+            servo.attach(SERVO_PIN); // Always use attach function after detach to re-connect your servo with the board
+            Serial.println("28"); // Turn left high speed
+            servo.write(28);
+            delay(1000);
+            servo.detach(); // Stop
+            delay(1000);
+            servo.attach(SERVO_PIN);
+            Serial.println("0");
+            servo.write(0);
+            delay(1000);
+            servo.detach();
+            delay(1000);
+            servo.attach(SERVO_PIN);
         } else {
             Serial.println("Servo not attached");
         }
@@ -143,10 +160,10 @@ void setup()
     alarm.alarmPM = false;
 
     alarm.alarmDay = 5; // 1 is Sunday
-    alarm.alarmHour = 16;
-    alarm.alarmMinute = 50;
+    alarm.alarmHour = 7;
+    alarm.alarmMinute = 45;
     alarm.alarmSecond = 0;
-    alarm.alarmBits = 0b00001110; // Alarm 1 every second
+    alarm.alarmBits = 0b00001000; // Alarm 1 every day
 
     rtc.turnOffAlarm(1);
     rtc.turnOffAlarm(2);
@@ -154,8 +171,35 @@ void setup()
         alarm.alarmBits, alarm.alarmIsDay, alarm.alarmH12, alarm.alarmPM);
     rtc.turnOnAlarm(1);
 
-    if (rtc.checkIfAlarm(1)) {
-        Serial.println("Alarm 1 set");
+    if (rtc.checkIfAlarm(1)) { 
+        Serial.println("Alarm 1 set"); // the following code is kinda messy but was only put in for debug purposes
+        byte A1Day;
+        byte A1Hour;
+        byte A1Minute;
+        byte A1Second;
+        byte AlarmBits;
+        bool A1Dy;
+        bool A1h12;
+        bool A1PM;
+
+        rtc.getA1Time(A1Day, A1Hour, A1Minute, A1Second, AlarmBits, A1Dy, A1h12, A1PM);
+
+        Serial.print("A1Day: ");
+        Serial.println(A1Day);
+        Serial.print("A1Hour: ");
+        Serial.println(A1Hour);
+        Serial.print("A1Minute: ");
+        Serial.println(A1Minute);
+        Serial.print("A1Second: ");
+        Serial.println(A1Second);
+        Serial.print("AlarmBits: ");
+        Serial.println(AlarmBits);
+        Serial.print("A1Dy: ");
+        Serial.println(A1Dy, BIN);
+        Serial.print("A1h12: ");
+        Serial.println(A1h12);
+        Serial.print("A1PM: ");
+        Serial.println(A1PM);
     } else {
         Serial.println("Alarm 1 not set");
         byte A1Day;
@@ -180,7 +224,7 @@ void setup()
         Serial.print("AlarmBits: ");
         Serial.println(AlarmBits);
         Serial.print("A1Dy: ");
-        Serial.println(A1Dy);
+        Serial.println(A1Dy, BIN);
         Serial.print("A1h12: ");
         Serial.println(A1h12);
         Serial.print("A1PM: ");
@@ -198,8 +242,8 @@ void setup()
 
 void loop()
 {
-    DateTime currentMoment = RTClib::now();
-
+    servo.attach(SERVO_PIN);
+    // DateTime currentMoment = RTClib::now();
     // display the current date and time (debug)
     // Serial.print(currentMoment.year(), DEC);
     // Serial.print('/');
@@ -211,29 +255,35 @@ void loop()
     // Serial.print(':');
     // Serial.print(currentMoment.minute(), DEC);
     // Serial.print(':');
-    Serial.print(currentMoment.second(), DEC);
-    Serial.println();
+    // Serial.print(currentMoment.second(), DEC);
+    // Serial.println();
 
     // Serial.print(currentMoment.unixtime());
 
-    Serial.print("T="); // apparenty, this can do temperature
-    Serial.println(rtc.getTemperature(), 2);
+    // Serial.print("T="); // apparenty, this can do temperature
+    // Serial.println(rtc.getTemperature(), 2);
 
     if (tick) {
         Serial.println("WAKE UP");
-        // TODO: buy new servo, mine is fried
         digitalWrite(LED_BUILTIN, HIGH);
-
-        // servo.attach(SERVO_PIN);
-        // servo.write(180);
-        // delay(1000);
-        // servo.write(0);
-        delay(500);
-        // servo.detach();
+        
+        Serial.println("28"); // Turn left high speed
+        servo.write(28);
+        delay(100);
+        servo.detach(); // Stop
+        delay(100);
+        servo.attach(SERVO_PIN);
+        Serial.println("0");
+        servo.write(0);
+        delay(1000);
+        servo.detach();
+        delay(1000);
+        servo.attach(SERVO_PIN);
 
         digitalWrite(LED_BUILTIN, LOW);
         tick = 0;
 
+        // re-attach servo
         // clear flag
         rtc.checkIfAlarm(1);
     }
