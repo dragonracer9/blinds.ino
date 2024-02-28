@@ -16,6 +16,8 @@
 #include <Servo.h>
 #include <Wire.h>
 
+#include <Wake.h>
+
 /* pin layout servo sg90
 VCC(Red) - 5V
 SIG(orange) - D9
