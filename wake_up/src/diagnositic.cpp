@@ -1,5 +1,10 @@
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#endif
+
 #include "../include/diagnostic.h"
 #include "../include/defines.h"
+#include <stdint.h>
 #include <Servo.h>
 
 void servo_check(Servo& servo)

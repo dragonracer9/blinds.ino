@@ -1,5 +1,6 @@
 #if !defined(DEFINES)
 #define DEFINES
+#include <stdint.h>
 
 #define SERVO_PIN 6
 
@@ -15,6 +16,8 @@ struct Dates {
     uint8_t  hour;
     uint8_t  minute;
     uint8_t  second;
+    void set_date(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+    void fmt_print();
 };
 
 struct Alarm {
@@ -26,6 +29,8 @@ struct Alarm {
     bool alarmIsDay;
     bool alarmH12;
     bool alarmPM;
+    void set_alarm(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool, bool, bool);
+    void fmt_print();
 };
 
 

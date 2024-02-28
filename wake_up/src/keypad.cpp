@@ -1,4 +1,9 @@
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#endif
+
 #include "../include/keypad.h"
+#include <stdint.h>
 
 void get_date(uint8_t & year, uint8_t & month, uint8_t & date, uint8_t & dOW,
     uint8_t & hour, uint8_t & minute, uint8_t & second)

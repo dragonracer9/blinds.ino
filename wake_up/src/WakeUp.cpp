@@ -13,6 +13,7 @@
 #include <DS3231.h>
 #include <Servo.h>
 #include <Wire.h>
+#include <stdint.h>
 
 /* pin layout servo sg90
 VCC(Red) - 5V
@@ -40,7 +41,7 @@ void isr_wakeUp()
     tick = 1;
 }
 
-void setup()
+int main()
 {
 
     Serial.begin(9600);
@@ -67,12 +68,12 @@ void setup()
 
     if (Serial) {
         get_date(now.year, now.month, now.date, now.dOW, now.hour, now.minute, now.second);
-        rtc_set_date(rtc, );
+        rtc_set_date(rtc, now);
     }
 
     // Set the alarm
     //--------------------------------
-    rtc_set_alarm(alarm); // default values are what i want anyway
+    alarm.set_alarm(1, 7, 30, 0, 0b00001000, true, false, false); 
 
     rtc.turnOffAlarm(1);
     rtc.turnOffAlarm(2);
@@ -80,11 +81,11 @@ void setup()
         alarm.alarmBits, alarm.alarmIsDay, alarm.alarmH12, alarm.alarmPM);
     rtc.turnOnAlarm(1);
 
-    uint8_t  A1Day;
-    uint8_t  A1Hour;
-    uint8_t  A1Minute;
-    uint8_t  A1Second;
-    uint8_t  AlarmBits;
+    uint8_t A1Day;
+    uint8_t A1Hour;
+    uint8_t A1Minute;
+    uint8_t A1Second;
+    uint8_t AlarmBits;
     bool A1Dy;
     bool A1h12;
     bool A1PM;
@@ -106,6 +107,10 @@ void setup()
 
     // Use builtin LED to blink
     pinMode(LED_BUILTIN, OUTPUT);
+
+    while (1) {
+        loop();
+    }
 }
 
 void loop()
