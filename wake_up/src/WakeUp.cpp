@@ -8,12 +8,7 @@
 #include "Arduino.h"
 #endif
 
-#include "../include/Wake.h"
-#include "../include/defines.h"
-#include "../include/diagnostic.h"
-#include "../include/keypad.h"
-#include "../include/lcd.h"
-#include "../include/alarm.h"
+#include "../include/WakeUp.h"
 
 #include <DS3231.h>
 #include <Servo.h>
@@ -85,11 +80,11 @@ void setup()
         alarm.alarmBits, alarm.alarmIsDay, alarm.alarmH12, alarm.alarmPM);
     rtc.turnOnAlarm(1);
 
-    byte A1Day;
-    byte A1Hour;
-    byte A1Minute;
-    byte A1Second;
-    byte AlarmBits;
+    uint8_t  A1Day;
+    uint8_t  A1Hour;
+    uint8_t  A1Minute;
+    uint8_t  A1Second;
+    uint8_t  AlarmBits;
     bool A1Dy;
     bool A1h12;
     bool A1PM;

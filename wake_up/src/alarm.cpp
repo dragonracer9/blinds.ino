@@ -6,11 +6,11 @@ void rtc_set_alarm(Alarm alarm,
     bool isDay = true,
     bool h12 = false,
     bool PM = false,
-    byte day = 1,
-    byte hour = 7,
-    byte min = 30,
-    byte sec = 0,
-    byte bits = 0b00001000)
+    uint8_t  day = 1,
+    uint8_t  hour = 7,
+    uint8_t  min = 30,
+    uint8_t  sec = 0,
+    uint8_t  bits = 0b00001000)
 {
     alarm.alarmIsDay = isDay;
     alarm.alarmH12 = h12; // use 24-hour time mode
@@ -23,11 +23,11 @@ void rtc_set_alarm(Alarm alarm,
     alarm.alarmBits = bits; // Alarm 1 every day
 }
 
-void rtc_alarm_print_time(byte A1Day,
-    byte A1Hour,
-    byte A1Minute,
-    byte A1Second,
-    byte AlarmBits,
+void rtc_alarm_print_time(uint8_t  A1Day,
+    uint8_t  A1Hour,
+    uint8_t  A1Minute,
+    uint8_t  A1Second,
+    uint8_t  AlarmBits,
     bool A1Dy,
     bool A1h12,
     bool A1PM)

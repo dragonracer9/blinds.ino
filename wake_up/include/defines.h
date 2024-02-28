@@ -8,21 +8,21 @@
 
 // Define the data structures
 struct Dates {
-    byte year;
-    byte month;
-    byte date;
-    byte dOW;
-    byte hour;
-    byte minute;
-    byte second;
+    uint8_t  year;
+    uint8_t  month;
+    uint8_t  date;
+    uint8_t  dOW;
+    uint8_t  hour;
+    uint8_t  minute;
+    uint8_t  second;
 };
 
 struct Alarm {
-    byte alarmDay;
-    byte alarmHour;
-    byte alarmMinute;
-    byte alarmSecond;
-    byte alarmBits;
+    uint8_t  alarmDay;
+    uint8_t  alarmHour;
+    uint8_t  alarmMinute;
+    uint8_t  alarmSecond;
+    uint8_t  alarmBits;
     bool alarmIsDay;
     bool alarmH12;
     bool alarmPM;
