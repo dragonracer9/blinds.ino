@@ -1,6 +1,8 @@
 #include "../includes/diagnostic.h"
+#include "../includes/defines.h"
+#include <Servo.h>
 
-void servo_check()
+void servo_check(Servo& servo)
 {
     Serial.println("0");
     servo.write(0);
