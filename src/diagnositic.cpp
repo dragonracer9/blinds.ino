@@ -1,5 +1,5 @@
-#include "../includes/diagnostic.h"
-#include "../includes/defines.h"
+#include "../include/diagnostic.h"
+#include "../include/defines.h"
 #include <Servo.h>
 
 void servo_check(Servo& servo)

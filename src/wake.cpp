@@ -8,12 +8,12 @@
 #include "Arduino.h"
 #endif
 
-#include "../includes/Wake.h"
-#include "../includes/defines.h"
-#include "../includes/diagnostic.h"
-#include "../includes/keypad.h"
-#include "../includes/lcd.h"
-#include "../includes/alarm.h"
+#include "../include/Wake.h"
+#include "../include/defines.h"
+#include "../include/diagnostic.h"
+#include "../include/keypad.h"
+#include "../include/lcd.h"
+#include "../include/alarm.h"
 
 #include <DS3231.h>
 #include <Servo.h>

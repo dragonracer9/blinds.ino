@@ -1,5 +1,5 @@
-#include "../includes/alarm.h"
-#include "../includes/defines.h"
+#include "../include/alarm.h"
+#include "../include/defines.h"
 #include <DS3231.h>
 
 void rtc_set_alarm(Alarm alarm,
