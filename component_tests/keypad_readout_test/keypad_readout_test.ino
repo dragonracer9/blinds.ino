@@ -11,8 +11,8 @@
 #include <Keypad.h>
 
 
-const uint8_t  ROWS = 4; //four rows
-const uint8_t  COLS = 4; //four columns
+const byte ROWS = 4; //four rows
+const byte COLS = 4; //four columns
 
 //define the two-dimensional array on the buttons of the keypads
 char hexaKeys[ROWS][COLS] = {
@@ -22,8 +22,8 @@ char hexaKeys[ROWS][COLS] = {
   {'*','0','#','D'}
 };
 
-uint8_t  rowPins[ROWS] = {10, 9, 8, 7}; //connect to the row pinouts of the keypad
-uint8_t  colPins[COLS] = {5, 4, 3, 2}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {10, 9, 8, 7}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {5, 4, 3, 2}; //connect to the column pinouts of the keypad
 
 //initialize an instance of class NewKeypad
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
