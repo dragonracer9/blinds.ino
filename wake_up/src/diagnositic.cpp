@@ -2,10 +2,12 @@
 #include "Arduino.h"
 #endif
 
-#include "../include/diagnostic.h"
 #include "../include/defines.h"
-#include <stdint.h>
+#include "../include/diagnostic.h"
+#include "../include/keypad_h.h"
+#include <Keypad.h>
 #include <Servo.h>
+#include <stdint.h>
 
 void servo_check(Servo& servo)
 {
@@ -27,4 +29,21 @@ void servo_check(Servo& servo)
     servo.detach();
     delay(1000);
     servo.attach(SERVO_PIN);
+}
+
+void keypad_diagnostic(Keypad& keypad) // TODO: print debug info to LCD
+{
+    int carriage = 0;
+    char key {};
+    do {
+        key = keypad.getKey();
+        if (key) {
+            Serial.println("");
+            Serial.println("________________");
+            Serial.print("Button pressed: ");
+            Serial.println(key);
+            Serial.print("Carriage: ");
+            Serial.println(carriage);
+        }
+    } while (key != 'A');
 }

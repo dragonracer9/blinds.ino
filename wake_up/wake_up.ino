@@ -13,9 +13,9 @@
  */
 
 #include <DS3231.h>
+#include <Keypad.h>
 #include <Servo.h>
 #include <Wire.h>
-#include <Keypad.h>
 #include <stdint.h>
 
 #include "include/WakeUp.h"

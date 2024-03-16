@@ -6,9 +6,11 @@
 #include "Arduino.h"
 #endif
 
-#include <Servo.h> 
+#include <Keypad.h>
+#include <Servo.h>
 #include <stdint.h>
 
 void servo_check(Servo&);
+void keypad_diagnostic(Keypad&);
 
 #endif // DIAGNOSTIC_H

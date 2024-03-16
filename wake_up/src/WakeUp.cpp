@@ -11,9 +11,9 @@
 #include "../include/WakeUp.h"
 
 #include <DS3231.h>
+#include <Keypad.h>
 #include <Servo.h>
 #include <Wire.h>
-#include <Keypad.h>
 #include <stdint.h>
 
 /* pin layout servo sg90
@@ -68,13 +68,13 @@ int main()
     rtc.setClockMode(false);
 
     if (Serial) {
-        get_date(now.year, now.month, now.date, now.dOW, now.hour, now.minute, now.second);
+        serial_get_date(now.year, now.month, now.date, now.dOW, now.hour, now.minute, now.second);
         rtc_set_date(rtc, now);
     }
 
     // Set the alarm
     //--------------------------------
-    alarm.set_alarm(1, 7, 30, 0, 0b00001000, true, false, false); 
+    alarm.set_alarm(1, 7, 30, 0, 0b00001000, true, false, false);
 
     rtc.turnOffAlarm(1);
     rtc.turnOffAlarm(2);

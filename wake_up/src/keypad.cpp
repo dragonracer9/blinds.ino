@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #endif
 
-#include "../include/keypad.h"
+#include "../include/keypad_h.h"
 #include <Keypad.h>
 #include <stdint.h>
 
@@ -20,24 +20,7 @@ char hexaKeys[ROWS][COLS] = {
 uint8_t rowPins[ROWS] = { 10, 9, 8, 7 }; // connect to the row pinouts of the keypad
 uint8_t colPins[COLS] = { 5, 4, 3, 2 }; // connect to the column pinouts of the keypad
 
-Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
-
-void keypad_diagnostic() // TODO: print debug info to LCD
-{
-    int carriage = 0;
-    char key {};
-    do {
-        key = customKeypad.getKey();
-        if (key) {
-            Serial.println("");
-            Serial.println("________________");
-            Serial.print("Button pressed: ");
-            Serial.println(key);
-            Serial.print("Carriage: ");
-            Serial.println(carriage);
-        }
-    } while (key != 'A');
-}
+//Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 void get_date(uint8_t& year, uint8_t& month, uint8_t& date, uint8_t& dOW,
     uint8_t& hour, uint8_t& minute, uint8_t& second)

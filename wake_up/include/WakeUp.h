@@ -7,12 +7,11 @@
 
 #include "defines.h"
 #include "diagnostic.h"
-#include "keypad.h"
+#include "keypad_h.h"
 #include "lcd.h"
 #include "rtc.h"
 #include <stdint.h>
 
 void isr_wakeUp();
-
 
 #endif // WAKE
